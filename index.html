@@ -1,42 +1,621 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Reese Hannam</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reese Hannam — Computer Science Student</title>
+  <meta name="description" content="Portfolio of Reese Hannam — Computer Science student. Projects, experience, and resume." />
+  <meta name="theme-color" content="#0b1220" />
+
   <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      padding: 50px;
-      background: #0f172a;
-      color: white;
+    :root{
+      --bg0:#070b13;
+      --bg1:#0b1220;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.08);
+      --stroke: rgba(255,255,255,0.12);
+      --text:#eef3ff;
+      --muted: rgba(238,243,255,0.72);
+      --muted2: rgba(238,243,255,0.55);
+      --accent:#7aa7ff;
+      --accent2:#b5c9ff;
+      --good:#6ee7b7;
+      --shadow: 0 18px 60px rgba(0,0,0,0.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+      --gap: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
     }
 
-    h1 {
-      font-size: 48px;
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1000px 700px at 20% 15%, rgba(122,167,255,0.18), transparent 60%),
+        radial-gradient(900px 650px at 85% 30%, rgba(181,201,255,0.12), transparent 55%),
+        radial-gradient(1000px 700px at 45% 95%, rgba(110,231,183,0.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
     }
 
-    p {
-      font-size: 20px;
-      color: #cbd5f5;
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ color: var(--accent2); }
+
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 28px 18px 60px; }
+
+    /* Top nav */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      border-radius: 999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 14px;
+      z-index: 10;
     }
 
-    a {
-      display: inline-block;
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 220px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(122,167,255,0.15);
+    }
+    .brand b{ letter-spacing: 0.2px; }
+    .brand span{ color: var(--muted2); font-size: 13px; }
+
+    .nav{
+      display:flex; align-items:center; gap:14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav a{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .nav a:hover{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btnrow{ display:flex; gap:10px; align-items:center; }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      white-space: nowrap;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-1px);
+    }
+    .btn.primary{
+      border-color: rgba(122,167,255,0.35);
+      background: linear-gradient(180deg, rgba(122,167,255,0.18), rgba(122,167,255,0.10));
+    }
+    .btn.primary:hover{
+      border-color: rgba(122,167,255,0.55);
+      background: linear-gradient(180deg, rgba(122,167,255,0.24), rgba(122,167,255,0.14));
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 18px;
       margin-top: 20px;
-      padding: 12px 20px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+    }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .brand{ min-width: 0; }
+      .nav{ display:none; }
+    }
+
+    .card{
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .hero{
+      padding: 26px 26px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        radial-gradient(600px 320px at 15% 10%, rgba(122,167,255,0.22), transparent 60%),
+        radial-gradient(520px 300px at 80% 35%, rgba(181,201,255,0.16), transparent 55%);
+      opacity: .9;
+      pointer-events:none;
+    }
+    .hero > *{ position:relative; z-index:1; }
+
+    .kicker{
+      display:flex; align-items:center; gap:10px;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.2px;
+      margin-bottom: 10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.12);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .pill strong{ color: var(--text); font-weight:700; }
+
+    h1{
+      margin: 0;
+      font-size: clamp(34px, 4vw, 56px);
+      letter-spacing: -0.9px;
+      line-height: 1.04;
+    }
+    .subtitle{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 64ch;
+    }
+
+    .heroActions{
+      display:flex; flex-wrap:wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .meta{
+      margin-top: 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      color: var(--muted2);
+      font-size: 13px;
+    }
+    .meta a{
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .meta a:hover{
+      color: var(--accent2);
+      border-bottom-color: rgba(181,201,255,0.45);
+    }
+
+    /* Right column */
+    .side{
+      padding: 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+    .side h3{
+      margin: 0 0 8px;
+      font-size: 14px;
+      letter-spacing: 0.25px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .item{
+      padding: 14px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.10);
+      border-radius: 16px;
+    }
+    .item b{ display:block; font-size: 14px; margin-bottom: 4px; }
+    .item span{ display:block; color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .tagrow{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .tag{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(238,243,255,0.82);
+    }
+
+    /* Sections */
+    .section{
+      margin-top: 18px;
+      padding: 20px;
+    }
+    .section h2{
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .section p{
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .projGrid{
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 980px){
+      .projGrid{ grid-template-columns: 1fr; }
+    }
+    .proj{
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(0,0,0,0.10), rgba(255,255,255,0.03));
+    }
+    .proj h3{
+      margin: 0 0 6px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+    .proj p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .proj .tagrow{ margin-top: 12px; }
+    .proj .links{
+      margin-top: 12px;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .proj .links a{
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .exp{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .role{
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.10);
+    }
+    .roleTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .roleTop b{ font-size: 15px; }
+    .roleTop span{ color: var(--muted2); font-size: 13px; white-space: nowrap; }
+    .role ul{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    footer{
+      margin-top: 18px;
+      color: var(--muted2);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px 0 0;
+    }
+
+    /* Tiny helper */
+    .sep{
+      height:1px;
+      background: rgba(255,255,255,0.10);
+      margin: 14px 0;
     }
   </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="dot" aria-hidden="true"></div>
+        <div>
+          <b>Reese Hannam</b><br />
+          <span>Computer Science Student</span>
+        </div>
+      </div>
 
-  <h1>Reese Hannam</h1>
-  <p>Computer Science Student | Software Developer</p>
+      <nav class="nav" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
-  <a href="#">View Resume</a>
+      <div class="btnrow">
+        <a class="btn" href="Reese_Hannam_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+        <a class="btn primary" href="#projects">View Projects</a>
+      </div>
+    </header>
 
+    <main class="grid">
+      <!-- Left -->
+      <section class="card hero" id="top">
+        <div class="kicker">
+          <span class="pill"><strong>BGSU</strong> • 3.9 GPA</span>
+          <span class="pill"><strong>Minor</strong> • General Business</span>
+          <span class="pill"><strong>Grad</strong> • 2026 (Expected)</span>
+        </div>
+
+        <h1>Building practical software with clean UX, automation, and performance in mind.</h1>
+        <p class="subtitle">
+          I’m a Computer Science student who enjoys shipping real projects—automation workflows, web apps, and performance-focused improvements.
+          I’m currently focused on building portfolio-ready work and getting interview-ready demos live.
+        </p>
+
+        <div class="heroActions">
+          <a class="btn primary" href="Reese_Hannam_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+          <a class="btn" href="https://github.com/reese-hannam" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/reese-hannam" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="mailto:reese.hannam@yahoo.com">Email</a>
+        </div>
+
+        <div class="meta" id="contact">
+          <span><b>Email:</b> <a href="mailto:reese.hannam@yahoo.com">reese.hannam@yahoo.com</a></span>
+          <span>•</span>
+          <span><b>Phone:</b> <a href="tel:+14198354299">419-835-4299</a></span>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="section" style="padding: 0; border: 0; background: transparent; box-shadow: none;">
+          <h2 style="margin:0 0 10px;">Objective</h2>
+          <p>
+            Motivated Computer Science student seeking an internship where I can contribute problem-solving abilities,
+            technical skills, and a collaborative mindset to support projects, drive innovation, and deliver value.
+          </p>
+        </div>
+      </section>
+
+      <!-- Right -->
+      <aside class="card side">
+        <div>
+          <h3>Highlights</h3>
+          <div class="list">
+            <div class="item">
+              <b>Intern — Application Development (Summer 2025)</b>
+              <span>Velocity Technologies Inc. • Toledo, OH</span>
+              <div class="tagrow">
+                <span class="tag">n8n</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">OpenAI</span>
+                <span class="tag">Jira/Confluence</span>
+              </div>
+            </div>
+            <div class="item">
+              <b>Shopify performance optimization</b>
+              <span>Refactoring, native lazy loading, script deferrals, Core Web Vitals improvements.</span>
+              <div class="tagrow">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Liquid</span>
+                <span class="tag">Lighthouse</span>
+              </div>
+            </div>
+            <div class="item">
+              <b>Leadership</b>
+              <span>Team Captain — Intramural Basketball & Volleyball</span>
+              <div class="tagrow">
+                <span class="tag">Communication</span>
+                <span class="tag">Teamwork</span>
+                <span class="tag">Ownership</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <div class="list">
+            <div class="item">
+              <b>Resume</b>
+              <span><a href="Reese_Hannam_Resume.pdf" target="_blank" rel="noopener">Open PDF</a></span>
+            </div>
+            <div class="item">
+              <b>GitHub</b>
+              <span><a href="https://github.com/reese-hannam" target="_blank" rel="noopener">github.com/reese-hannam</a></span>
+            </div>
+            <div class="item">
+              <b>LinkedIn</b>
+              <span><a href="https://www.linkedin.com/in/reese-hannam" target="_blank" rel="noopener">linkedin.com/in/reese-hannam</a></span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="card section" id="projects">
+      <h2>Projects</h2>
+      <p>
+        A few projects that represent what I like building: automation, performance, and interactive experiences.
+      </p>
+
+      <div class="projGrid">
+        <article class="proj">
+          <h3>AI-Powered Email Automation System</h3>
+          <p>
+            Automated weekly updates and inbound email handling with context-aware replies using a PostgreSQL-backed knowledge base.
+            Includes custom email threading support.
+          </p>
+          <div class="tagrow">
+            <span class="tag">n8n</span>
+            <span class="tag">Python</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">OpenAI</span>
+          </div>
+          <div class="links">
+            <span>Demo/Repo: <em style="color:var(--muted2)">add link later</em></span>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3>Shopify Storefront Optimization</h3>
+          <p>
+            Audited and refactored storefront code to improve Core Web Vitals and Lighthouse performance across key pages.
+            Implemented dynamic image sizing and native lazy loading to reduce load time.
+          </p>
+          <div class="tagrow">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Liquid</span>
+            <span class="tag">CSS</span>
+            <span class="tag">HTML</span>
+            <span class="tag">Shopify</span>
+          </div>
+          <div class="links">
+            <span>Case study: <em style="color:var(--muted2)">add link later</em></span>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3>Name That Tune</h3>
+          <p>
+            A local multiplayer music guessing game with a TV display and phone-based player screens.
+            Built to be fast to start, easy to host, and demo-friendly for interviews.
+          </p>
+          <div class="tagrow">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Socket.IO</span>
+            <span class="tag">UI/UX</span>
+          </div>
+          <div class="links">
+            <span>Demo/Repo: <em style="color:var(--muted2)">add link later</em></span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="card section" id="experience">
+      <h2>Experience</h2>
+      <p>Recent roles focused on shipping useful software, automation, and infrastructure support.</p>
+
+      <div class="exp">
+        <div class="role">
+          <div class="roleTop">
+            <b>Velocity Technologies Inc. — Intern, Application Development</b>
+            <span>Summer 2025 • Toledo, OH</span>
+          </div>
+          <ul>
+            <li>Built AI-powered workflows in n8n integrating Jira/Confluence with a PostgreSQL knowledge base to automate client updates and replies.</li>
+            <li>Audited and optimized a Shopify storefront, improving performance scores through code refactoring, native lazy loading, and script deferrals.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <div class="roleTop">
+            <b>Teijin Automotive Technologies — Intern, Engineering/IT Department</b>
+            <span>Summer 2022–2024 • Carey, OH</span>
+          </div>
+          <ul>
+            <li>Supported networking projects including switch setup along with general helpdesk support.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section" id="skills">
+      <h2>Skills</h2>
+      <p>Tools and areas I’m comfortable working in, based on coursework and real project experience.</p>
+
+      <div class="projGrid" style="grid-template-columns: repeat(2, 1fr); margin-top: 14px;">
+        <div class="proj">
+          <h3>Technical</h3>
+          <div class="tagrow">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">C++</span>
+            <span class="tag">Swift</span>
+            <span class="tag">R</span>
+            <span class="tag">Dart</span>
+            <span class="tag">SQL</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Liquid</span>
+          </div>
+        </div>
+        <div class="proj">
+          <h3>Tools / Platforms</h3>
+          <div class="tagrow">
+            <span class="tag">GitHub</span>
+            <span class="tag">Visual Studio</span>
+            <span class="tag">Jira</span>
+            <span class="tag">Confluence</span>
+            <span class="tag">Shopify</span>
+            <span class="tag">n8n</span>
+            <span class="tag">Xcode</span>
+            <span class="tag">Android Studio</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <p style="color: var(--muted2);">
+        Networking & Security (basic): IP addressing, network devices. Design & UX: wireframing, prototyping, usability testing.
+        Core CS: OOP, data structures, Agile development. AI/Automation: agentic workflows, prompt engineering, vector databases.
+      </p>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Reese Hannam • <a href="#top">Back to top</a>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
