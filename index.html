@@ -151,10 +151,10 @@
       background: var(--surface);
       color: var(--text);
       cursor: pointer;
-      transition: all 0.18s var(--ease);
+      transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
       white-space: nowrap;
     }
-    .btn:hover { background: var(--surface2); border-color: rgba(255,255,255,0.22); transform: translateY(-1px); }
+    .btn:hover { background: var(--surface2); border-color: rgba(255,255,255,0.22); }
     .btn.blue {
       background: linear-gradient(135deg, rgba(77,143,255,0.22), rgba(77,143,255,0.10));
       border-color: rgba(77,143,255,0.4);
@@ -167,7 +167,7 @@
       color: #fff;
       box-shadow: 0 4px 20px rgba(77,143,255,0.35);
     }
-    .btn.solid:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(77,143,255,0.45); }
+    .btn.solid:hover { box-shadow: 0 8px 28px rgba(77,143,255,0.45); }
 
     /* ─── HERO ─── */
     .hero {
