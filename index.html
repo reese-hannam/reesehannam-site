@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Reese Hannam — CS Student & Developer</title>
-  <meta name="description" content="Portfolio of Reese Hannam — CS student with internship experience in software development and AI automation. Building LLM-powered systems, optimizing web performance, and deploying real applications." />
+  <title>Reese Hannam | Software Developer</title>
+  <meta name="description" content="Portfolio of Reese Hannam, a software developer specializing in AI automation, e-commerce, and full-stack web applications. Projects, experience, and contact info." />
   <meta name="theme-color" content="#FFFFFF" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,6 +28,7 @@
       --mono:      'IBM Plex Mono', monospace;
       --max:       1100px;
       --ease:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --shadow:    0 6px 28px rgba(12, 27, 53, 0.09);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,11 +45,21 @@
 
     a { color: inherit; text-decoration: none; }
 
+    ::selection { background: var(--accent); color: #fff; }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
     /* ─── NAV ─── */
     nav {
       width: 100%;
       border-bottom: 1px solid var(--border);
-      background: var(--bg);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -145,7 +156,24 @@
       padding: 72px 0 60px;
       border-bottom: 1px solid var(--border);
       animation: fadeUp 0.8s var(--ease) 0.05s both;
+      position: relative;
     }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -40px;
+      width: 46%;
+      height: 100%;
+      background-image: radial-gradient(var(--border2) 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: 0.35;
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9), transparent 85%);
+      mask-image: linear-gradient(to left, rgba(0,0,0,0.9), transparent 85%);
+      pointer-events: none;
+    }
+    .hero > * { position: relative; }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: none; }
@@ -168,7 +196,6 @@
       letter-spacing: 0;
       margin-bottom: 28px;
       font-family: var(--mono);
-      white-space: nowrap;
     }
 
     .hero-rule {
@@ -249,11 +276,12 @@
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 10px;
-      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), transform 0.2s var(--ease);
     }
     .card:hover {
-      border-color: var(--ink);
-      box-shadow: 0 4px 24px rgba(28, 25, 22, 0.09);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
     }
 
     /* ─── PROJECTS ─── */
@@ -287,7 +315,7 @@
     .proj-num {
       font-family: var(--mono);
       font-size: 10px;
-      color: var(--ink3);
+      color: var(--accent);
       letter-spacing: 1.5px;
       margin-bottom: 16px;
     }
@@ -396,17 +424,19 @@
     }
     .exp-bullets li {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       font-size: 13.5px;
       color: var(--ink2);
       line-height: 1.65;
     }
     .exp-bullets li::before {
-      content: '—';
-      color: var(--border2);
-      font-family: var(--mono);
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 1.5px;
+      background: var(--border2);
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 8px;
     }
     .exp-card .tags { margin-top: 16px; margin-bottom: 0; }
 
@@ -625,6 +655,14 @@
     }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      nav, .hero, .cta-section { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .card, .card:hover { transform: none; }
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 700px) {
       .wrap { padding: 0 20px 80px; }
@@ -632,6 +670,7 @@
       .nav-links { display: none; }
       .nav-actions .btn:not(.primary) { display: none; }
       .hero { padding: 48px 0 40px; }
+      .hero::before { display: none; }
       .hero-name { letter-spacing: -1.5px; }
       .exp-card { grid-template-columns: 1fr; gap: 10px; }
       .cta-section { padding: 40px 24px; }
@@ -644,11 +683,12 @@
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <div class="nav-brand">Reese Hannam <span>/ CS Student &amp; Developer</span></div>
+      <div class="nav-brand">Reese Hannam <span>/ Software Developer</span></div>
       <div class="nav-links">
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
       <div class="nav-actions">
@@ -666,12 +706,12 @@
     <!-- HERO -->
     <header class="hero">
       <h1 class="hero-name">Reese Hannam</h1>
-      <p class="hero-role">Application Developer &nbsp;&middot;&nbsp; CS Student at BGSU &nbsp;&middot;&nbsp; 3.9 GPA &nbsp;&middot;&nbsp; Exp. 2026</p>
+      <p class="hero-role">Application Developer at Velocity Technologies &nbsp;&middot;&nbsp; B.S. Computer Science, BGSU '26</p>
       <div class="hero-rule"></div>
       <p class="hero-desc">
-        CS student with internship experience in software development and AI automation. I build
-        production workflows and full-stack applications — LLM-powered systems, optimized storefronts,
-        and deployed apps using Python, JavaScript, Docker, and PostgreSQL.
+        Software developer working on AI automation, e-commerce, and full-stack web
+        applications. I build production workflows, high-traffic storefronts, and
+        self-hosted apps using Python, JavaScript, Docker, and PostgreSQL.
       </p>
 
       <div class="hero-actions">
@@ -694,41 +734,38 @@
       <div class="section-header">
         <span class="section-num">01</span>
         <h2 class="section-title">Projects</h2>
-        <span class="section-tag">Work</span>
+        <span class="section-tag">Client + Personal</span>
       </div>
-      <p class="lead">Real systems built and shipped. Each project solves an actual problem.</p>
+      <p class="lead">A mix of client work, personal builds, and hardware projects. Each one started with a real problem worth solving.</p>
 
       <div class="proj-grid">
         <article class="card proj-card">
-          <div class="proj-num">PROJECT 01</div>
-          <h3>AI-Powered Email Automation</h3>
-          <p>Architected a full automation pipeline from prompt design to delivery — integrating Jira/Confluence with a PostgreSQL vector knowledge base for client update emails and context-aware AI replies with custom edge-case handling.</p>
+          <div class="proj-num">HARDWARE</div>
+          <h3>Golf Sim Controller</h3>
+          <p>Built a floor-mounted controller for a golf simulator using an ESP32 microcontroller wired to arcade buttons that emulate keyboard inputs. Designed and 3D printed a custom housing to hold everything together cleanly.</p>
           <div class="tags">
-            <span class="tag">n8n</span>
-            <span class="tag">Python</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">OpenAI</span>
+            <span class="tag">ESP32</span>
+            <span class="tag">C++</span>
+            <span class="tag">HID / USB</span>
+            <span class="tag">3D Printing</span>
+            <span class="tag">CAD Design</span>
+          </div>
+          <div class="proj-footer">
+            <a class="proj-link" href="https://github.com/reese-hannam/Golf_Sim_Controller" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a class="proj-link" href="https://youtu.be/1dWvbpeyYvU" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              YouTube
+            </a>
           </div>
         </article>
 
         <article class="card proj-card">
-          <div class="proj-num">PROJECT 02</div>
-          <h3>Shopify Storefront Optimization</h3>
-          <p>Lead developer on a production Shopify storefront doing over $1M in monthly sales. Used Lighthouse and Chrome DevTools to identify bottlenecks, then applied lazy loading, dynamic image sizing, and script deferrals — improving performance scores by 20%.</p>
-          <div class="tags">
-            <span class="tag">JavaScript</span>
-            <span class="tag">Liquid</span>
-            <span class="tag">CSS</span>
-            <span class="tag">HTML</span>
-            <span class="tag">Shopify CLI</span>
-          </div>
-        </article>
-
-        <article class="card proj-card">
-          <div class="proj-num">PROJECT 03</div>
+          <div class="proj-num">WEB APP</div>
           <h3>Name That Tune</h3>
-          <p>Real-time multiplayer music guessing game with a TV host screen and simultaneous player devices. Integrated Spotify API with OAuth 2.0, containerized with Docker, and deployed on a self-hosted Linux server behind Cloudflare Tunnel for DDoS mitigation.</p>
+          <p>Real-time multiplayer music guessing game with a TV host screen and simultaneous player devices. Integrated the Spotify API with OAuth 2.0, containerized with Docker, and deployed on a self-hosted Linux server behind Cloudflare Tunnel for DDoS mitigation.</p>
           <div class="tags">
             <span class="tag">Python</span>
             <span class="tag">Flask</span>
@@ -746,20 +783,30 @@
         </article>
 
         <article class="card proj-card">
-          <div class="proj-num">PROJECT 04</div>
-          <h3>Golf Sim Controller</h3>
-          <p>Built a floor-mounted controller for a golf simulator using an ESP32 microcontroller wired to arcade buttons that emulate keyboard inputs. Designed and 3D printed a custom housing to hold everything together cleanly.</p>
+          <div class="proj-num">HARDWARE</div>
+          <h3>GPS Speedometer</h3>
+          <p>Real-time digital speedometer built with an ESP32, a NEO-6M GPS module, and a color TFT display. Shows current speed on a smooth animated circular gauge with satellite tracking, a 5Hz GPS rate configured automatically at boot, and frame-rate independent speed smoothing.</p>
           <div class="tags">
             <span class="tag">ESP32</span>
             <span class="tag">C++</span>
-            <span class="tag">HID / USB</span>
+            <span class="tag">GPS / NMEA</span>
+            <span class="tag">TFT Display</span>
             <span class="tag">3D Printing</span>
-            <span class="tag">CAD Design</span>
+          </div>
+          <div class="proj-footer">
+            <a class="proj-link" href="https://github.com/reese-hannam/GPS-Speedometer" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+            <a class="proj-link" href="https://youtu.be/soe4kGF72lo" target="_blank" rel="noopener">
+              <svg width="11" height="11" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              YouTube
+            </a>
           </div>
         </article>
 
         <article class="card proj-card">
-          <div class="proj-num">PROJECT 05</div>
+          <div class="proj-num">MOBILE</div>
           <h3>Gameday iOS App Prototype</h3>
           <p>Designed and built a native iOS prototype in Xcode using user-centered design principles to streamline live event experiences: parking, seating, concessions, and real-time updates.</p>
           <div class="tags">
@@ -776,6 +823,37 @@
             </a>
           </div>
         </article>
+
+        <!--
+          The two projects below were built for my employer (Velocity Technologies).
+          Kept here but hidden for now. To show them again, uncomment this block.
+
+        <article class="card proj-card">
+          <div class="proj-num">AUTOMATION</div>
+          <h3>AI-Powered Email Automation</h3>
+          <p>Architected a full automation pipeline from prompt design to delivery, integrating Jira and Confluence with a PostgreSQL vector knowledge base to power client update emails and context-aware AI replies with custom edge case handling.</p>
+          <div class="tags">
+            <span class="tag">n8n</span>
+            <span class="tag">Python</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">OpenAI</span>
+          </div>
+        </article>
+
+        <article class="card proj-card">
+          <div class="proj-num">E-COMMERCE</div>
+          <h3>Shopify Storefront Optimization</h3>
+          <p>Lead developer on a production Shopify storefront doing over $1M in monthly sales. Used Lighthouse and Chrome DevTools to identify bottlenecks, then applied lazy loading, dynamic image sizing, and script deferrals that improved performance scores by 20%.</p>
+          <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">Liquid</span>
+            <span class="tag">CSS</span>
+            <span class="tag">HTML</span>
+            <span class="tag">Shopify CLI</span>
+          </div>
+        </article>
+        -->
       </div>
     </section>
 
@@ -784,23 +862,23 @@
       <div class="section-header">
         <span class="section-num">02</span>
         <h2 class="section-title">Work Experience</h2>
-        <span class="section-tag">Experience</span>
+        <span class="section-tag">2022 &ndash; Present</span>
       </div>
-      <p class="lead">Hands-on internship experience shipping real software and infrastructure — not just shadow roles.</p>
+      <p class="lead">Where I've worked and what I shipped there.</p>
 
       <div class="exp-list">
         <div class="exp-card">
           <div class="exp-left">
-            <div class="exp-date">Summer 2025</div>
+            <div class="exp-date">2025 &ndash; Present</div>
             <div class="exp-loc">Toledo, OH &middot; On-site</div>
           </div>
           <div class="exp-right">
             <div class="exp-company">Velocity Technologies Inc.</div>
-            <div class="exp-role">Intern — Application Development</div>
+            <div class="exp-role">Application Developer</div>
             <ul class="exp-bullets">
               <li>Built AI-powered n8n workflows integrating Jira and Confluence with a PostgreSQL vector knowledge base to automate client update generation, reducing manual reporting effort.</li>
               <li>Developed a custom email node with threading support and context-aware AI replies backed by semantic vector search, enabling accurate automated responses to inbound client inquiries.</li>
-              <li>Audited and refactored a Shopify storefront, applying native lazy loading, dynamic image sizing, and script deferrals to improve web performance scores by an average of 20% across key pages.</li>
+              <li>Audited and refactored a production Shopify storefront, applying native lazy loading, dynamic image sizing, and script deferrals to improve web performance scores by an average of 20% across key pages.</li>
             </ul>
             <div class="tags">
               <span class="tag">n8n</span>
@@ -817,12 +895,12 @@
 
         <div class="exp-card">
           <div class="exp-left">
-            <div class="exp-date">Summers 2022 – 2024</div>
+            <div class="exp-date">Summers 2022 &ndash; 2024</div>
             <div class="exp-loc">Carey, OH &middot; On-site</div>
           </div>
           <div class="exp-right">
             <div class="exp-company">Teijin Automotive Technologies</div>
-            <div class="exp-role">Intern — Engineering / IT Department</div>
+            <div class="exp-role">Intern, Engineering / IT Department</div>
             <ul class="exp-bullets">
               <li>Provided IT helpdesk support and assisted with networking infrastructure across 3 consecutive summers, gaining hands-on exposure to enterprise hardware and switch configuration.</li>
             </ul>
@@ -842,9 +920,9 @@
       <div class="section-header">
         <span class="section-num">03</span>
         <h2 class="section-title">Technical Skills</h2>
-        <span class="section-tag">Skills</span>
+        <span class="section-tag">Core Stack</span>
       </div>
-      <p class="lead">Grounded in coursework, proven in real internship and project work.</p>
+      <p class="lead">The languages, tools, and concepts I use most, in production and in personal projects.</p>
 
       <div class="skills-grid">
         <div class="card skill-card">
@@ -903,11 +981,11 @@
     </section>
 
     <!-- ABOUT + EDUCATION -->
-    <section class="reveal">
+    <section id="about" class="reveal">
       <div class="section-header">
         <span class="section-num">04</span>
         <h2 class="section-title">About &amp; Education</h2>
-        <span class="section-tag">Background</span>
+        <span class="section-tag">BGSU '26</span>
       </div>
       <p class="lead">A little more context on who I am and where I'm coming from.</p>
 
@@ -915,14 +993,16 @@
         <div class="card about-card">
           <h3>Who I Am</h3>
           <p>
-            I'm a Computer Science student at Bowling Green State University with a minor in General Business.
+            I'm a software developer at Velocity Technologies and a 2026 Computer Science graduate of
+            Bowling Green State University, where I also earned a minor in General Business.
             I love the intersection of software and real-world problems: automating a workflow
             that saves a team hours each week, improving a storefront that customers actually use, or building
             a game that brings people together.
           </p>
           <p>
-            Outside of software, I'm a team captain in intramural basketball and volleyball, which has sharpened
-            my communication, leadership, and ability to perform under pressure just as much as any classroom has.
+            Outside of software, I spent my college years as a team captain in intramural basketball and volleyball,
+            which sharpened my communication, leadership, and ability to perform under pressure just as much as
+            any classroom did.
           </p>
           <div class="tags">
             <span class="tag">Dean's List</span>
@@ -940,7 +1020,7 @@
             <div class="ed-deg">B.S. in Computer Science · Minor in General Business</div>
             <div class="ed-meta">
               <span class="ed-gpa">3.9 GPA</span>
-              <span class="ed-year">2022 – 2026 (Exp.)</span>
+              <span class="ed-year">2022 &ndash; 2026</span>
             </div>
           </div>
         </div>
@@ -950,8 +1030,8 @@
     <!-- CONTACT CTA -->
     <section id="contact" class="cta-section reveal">
       <div class="cta-eyebrow">Get In Touch</div>
-      <h2>Let's build something great.</h2>
-      <p>I'm actively looking for internship and new grad opportunities. If you're hiring or just want to connect, I'd love to hear from you.</p>
+      <h2>Say hello.</h2>
+      <p>Whether you want to talk about a project, swap ideas, or just connect, my inbox is always open.</p>
 
       <div class="cta-actions">
         <a class="btn-inv white" href="mailto:reese.hannam@yahoo.com">
